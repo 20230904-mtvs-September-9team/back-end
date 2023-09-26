@@ -1,22 +1,32 @@
-#
-## 서버 포트 설정
-#server:
-#  port: 8080
-#
-## database 연동 설정
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/db_imagination?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-#    username: user_imagination
-#    password: 1234
-#  thymeleaf:
-#    cache: false
-#
-#  # spring data jpa 설정
-#  jpa:
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-#    open-in-view: false
-#    show-sql: true
-#    hibernate:
-#      ddl-auto: update    #      create로 하면 실행할떄마다 기존 데이터 삭제됨.
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/imagination
+    username: webserver
+    password: webserver
+    hikari:
+      auto-commit: false
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        format_sql: true
+        use_sql_comments: true
+        default_batch_fetch_size: 100
+    show-sql: true
+
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 10MB
+
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
