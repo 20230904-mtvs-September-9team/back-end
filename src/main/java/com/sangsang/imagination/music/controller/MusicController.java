@@ -1,9 +1,9 @@
 package com.sangsang.imagination.music.controller;
 
 import com.sangsang.imagination.music.dto.SelectionRequest;
-import com.sangsang.imagination.music.entity.ArtistEntity;
+import com.sangsang.imagination.music.entity.Artist;
 import com.sangsang.imagination.music.entity.Selection;
-import com.sangsang.imagination.music.entity.SongEntity;
+import com.sangsang.imagination.music.entity.Song;
 import com.sangsang.imagination.music.repository.ArtistRepository;
 import com.sangsang.imagination.music.repository.SelectionRepository;
 import com.sangsang.imagination.music.repository.SongRepository;
@@ -29,17 +29,19 @@ public class MusicController {
     }
 
     @GetMapping("/artists")
-    public List<ArtistEntity> getAllArtists() {
+    public List<Artist> getAllArtists() {
         return artistRepository.findAll();
     }
 
     @GetMapping("/songs")
-    public List<SongEntity> getAllSongs() {
+    public List<Song> getAllSongs() {
         return songRepository.findAll();
     }
 
     @PostMapping("/selection")
     public ResponseEntity<String> handleSelection(@RequestBody SelectionRequest selectionRequest) {
+        System.out.println(selectionRequest);
+
         String selectedArtist = selectionRequest.getArtist();
         String selectedSong = selectionRequest.getSong();
 
